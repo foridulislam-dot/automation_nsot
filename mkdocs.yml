@@ -187,6 +187,7 @@ nav:
   - Nautobot ইনস্টলেশন: installation.md
   - Nautobot ডেটা মডেল - নেটওয়ার্কের যোগসুত্র: datamodel.md
   - UI দিয়ে ডেটা এন্ট্রি: ui_organization.md
+  - কানেক্টিভিটি এবং এডভান্সড ফিচার: connectivity_adv.md
   - বইটা এখনো লেখা চলছে: status.md
 #     - কৃতজ্ঞতা এবং বাড়তি রিডিং: courtesy.md
 # #    - কেন বইটা লিখতে চাইলাম?: why-writing.md
