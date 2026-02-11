@@ -799,34 +799,6 @@ Password: ...
 
 ---
 
-### চ্যাপ্টার সারাংশ
-
-এই চ্যাপ্টারে আমরা শিখলাম:
-
-**Custom Fields:**
-- Warranty Expiry Date tracking করা
-- Building Name tracking করা
-- Power Consumption, Purchase Source ইত্যাদি
-- Custom Fields দিয়ে filtering করা
-
-**Tags:**
-- production, critical, backup, end-of-life, maintenance
-- ডিভাইসে মাল্টিপল ট্যাগ যোগ করা
-- ট্যাগ দিয়ে filtering
-- মেইনটেনেন্স এবং EOL tracking
-
-**Saved Filters:**
-- কমন কোয়েরি সেভ করা
-- এক ক্লিকে ফিল্টার এপ্লাই করা
-- টিম members এর সাথে শেয়ার করা
-
-**User Management:**
-- Groups তৈরি করা (NOC Team, Field Ops, Management)
-- Permissions configure করা (view, add, change, delete)
-- নতুন ইউজার তৈরি করা
-- গ্রুপে ইউজার যোগ করা
-- Permissions টেস্ট করা
-
 SkyNets Bangladesh এখন Nautobot কে তাদের নিজস্ব প্রয়োজন অনুযায়ী সাজিয়ে ফেলেছে। আসিফের ওয়ারেন্টি ট্র্যাকিং সমস্যা solve হয়েছে। করিম এখন সহজেই বিল্ডিং নাম দিয়ে সুইচ খুঁজে পায়। রফিক সাহেব নিরাপদে রিপোর্ট দেখতে পারেন ভুলে কিছু চেঞ্জ হওয়ার ভয় ছাড়া।
 
 পরের চ্যাপ্টারে আমরা দেখব কীভাবে ৮ হাজার কাস্টমার থেকে ৫০ হাজার কাস্টমারে স্কেল করা যায়, কী কী চ্যালেঞ্জ আসে, এবং কীভাবে Nautobot সেই জার্নিতে সাহায্য করে।

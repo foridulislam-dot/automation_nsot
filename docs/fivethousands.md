@@ -1,6 +1,6 @@
 এতক্ষণ আমরা শিখলাম Nautobot-এর বিভিন্ন ফিচার - কীভাবে সাইট তৈরি করতে হয়, ডিভাইস এড করতে হয়, আইপি ম্যানেজ করতে হয়, ক্যাবল ডকুমেন্ট করতে হয়। এখন সময় এসেছে এই সব জ্ঞান একসাথে কাজে লাগানোর। এই চ্যাপ্টারে আমরা দেখব কীভাবে একটা ছোট আইএসপির জন্য শুরু থেকে শেষ পর্যন্ত Nautobot সেটআপ করতে হয়।
 
-আমাদের উদাহরণ হিসেবে থাকবে "SkyNet Bangladesh"। তারা ঢাকার একটা এলাকায় ইন্টারনেট সার্ভিস দেয়। বর্তমানে তাদের প্রায় পাঁচ হাজার রেসিডেনশিয়াল কাস্টমার আছে। দুটো পপ - একটা মিরপুরে, আরেকটা কল্যাণপুরে। তারা এক্সেল শিট আর হাতে লেখা ডায়াগ্রাম দিয়ে নেটওয়ার্ক ম্যানেজ করছিল। এখন Nautobot-এ মুভ করার সিদ্ধান্ত নিয়েছে।
+আমাদের উদাহরণ হিসেবে থাকবে "SkyNet Bangladesh"। তারা ঢাকার নর্থ জোনে ইন্টারনেট সার্ভিস দেয়। বর্তমানে তাদের প্রায় পাঁচ হাজার রেসিডেনশিয়াল কাস্টমার আছে। দুটো পপ - একটা মিরপুরে, আরেকটা উত্তরায়। তারা এক্সেল শিট আর হাতে লেখা ডায়াগ্রাম দিয়ে নেটওয়ার্ক ম্যানেজ করছিল। এখন Nautobot-এ মুভ করার সিদ্ধান্ত নিয়েছে।
 
 ### শুরুর আগে - পরিকল্পনা করা
 
@@ -18,7 +18,7 @@ Nautobot-এ ডেটা এন্ট্রি শুরু করার আগ
 - আনুমানিক ৩ হাজার কাস্টমার
 - BTCL থেকে ৫ Gbps আপলিংক
 
-**কল্যাণপুর পপ:**
+**উত্তরা পপ:**
 
 - ১টা কোর রাউটার (MikroTik CCR2004)
 - ১টা ডিস্ট্রিবিউশন সুইচ (TP-Link TL-SG3428)
@@ -47,7 +47,7 @@ Type:
 
 Site:
   MIR = Mirpur
-  KAL = Kalyanpur
+  UTT = Uttara
 
 Role:
   CORE = Core device
@@ -58,7 +58,7 @@ Number: 01, 02, 03... (zero-padded)
 
 উদাহরণ:
   R-MIR-CORE-01 = Router, Mirpur, Core, #1
-  SW-KAL-ACC-03 = Switch, Kalyanpur, Access, #3
+  SW-UTT-ACC-03 = Switch, Uttara, Access, #3
 ```
 
 **ইন্টারফেস ডেসক্রিপশন:**
@@ -78,7 +78,7 @@ VLAN ID + Descriptive Name
 উদাহরণ:
   VLAN 10: MGMT_NETWORK
   VLAN 100: RESIDENTIAL_MIR
-  VLAN 101: RESIDENTIAL_KAL
+  VLAN 101: RESIDENTIAL_UTT
   VLAN 200: CORPORATE
 ```
 
@@ -123,19 +123,19 @@ Contact Email: jahangir@skynet.bd
 Description: Primary POP serving Mirpur area. Approximately 3000 residential customers.
 ```
 
-**কল্যাণপুর পপ তৈরি:**
+**উত্তরা পপ তৈরি:**
 
 ```
-Name: Kalyanpur POP
+Name: Uttara POP
 Location Type: POP
 Status: Active
-Physical Address: Plot 15, Road 3, Kalyanpur, Dhaka-1207
+Physical Address: Plot 15, Road 3, Uttara, Dhaka-1207
 Latitude: 23.7765
 Longitude: 90.3568
 Contact Name: Asif Rahman
 Contact Phone: +880 1811-234567
 Contact Email: asif@skynet.bd
-Description: Secondary POP serving Kalyanpur area. Approximately 2000 residential customers.
+Description: Secondary POP serving Uttara area. Approximately 2000 residential customers.
 ```
 
 **Rack তৈরি করুন:**
@@ -150,10 +150,10 @@ Width: 19 inches
 Height: 42U
 ```
 
-কল্যাণপুরে একটা:
+উত্তরায় একটা:
 ```
-Name: Rack-KAL-A
-Location: Kalyanpur POP
+Name: Rack-UTT-A
+Location: Uttara POP
 Status: Active
 Type: 4-post cabinet
 Width: 19 inches
@@ -587,9 +587,9 @@ address,status,assigned_object_type,assigned_object,dns_name,description
 10.10.10.30/24,Active,dcim.interface,SW-MIR-ACC-10:vlan10,sw-mir-acc-10.skynet.bd,Management IP
 ```
 
-### সপ্তাহ ৪: কল্যাণপুর পপ (দ্রুততর)
+### সপ্তাহ ৪: উত্তরা পপ (দ্রুততর)
 
-মিরপুর পপ কমপ্লিট হয়ে গেছে। এখন কল্যাণপুর পপ করতে অনেক কম সময় লাগবে, কারণ আমরা জানি কী করতে হবে।
+মিরপুর পপ কমপ্লিট হয়ে গেছে। এখন উত্তরা পপ করতে অনেক কম সময় লাগবে, কারণ আমরা জানি কী করতে হবে।
 
 ### দিন ১৮-১৯: ডিভাইস এবং ক্যাবল
 
@@ -598,7 +598,7 @@ address,status,assigned_object_type,assigned_object,dns_name,description
 ```
 Provider: Summit Communications
 ASN: 45928
-Circuit ID: SUMMIT-KAL-001
+Circuit ID: SUMMIT-UTT-001
 Commit Rate: 3000 Mbps
 Monthly Cost: BDT 250,000
 ```
@@ -606,9 +606,9 @@ Monthly Cost: BDT 250,000
 **ডিভাইস:**
 
 ```
-R-KAL-CORE-01 (MikroTik CCR2004)
-SW-KAL-DIST-01 (TP-Link TL-SG3428)
-SW-KAL-ACC-01 to SW-KAL-ACC-06 (TP-Link TL-SG1024D)
+R-UTT-CORE-01 (MikroTik CCR2004)
+SW-UTT-DIST-01 (TP-Link TL-SG3428)
+SW-UTT-ACC-01 to SW-UTT-ACC-06 (TP-Link TL-SG1024D)
 ```
 
 CSV দিয়ে সব ডিভাইস একসাথে ইমপোর্ট করুন।
@@ -622,8 +622,8 @@ CSV দিয়ে সব ডিভাইস একসাথে ইমপোর
 কল্যাণপুরের জন্য আইপি অ্যাসাইন করুন:
 
 ```
-R-KAL-CORE-01 Loopback: 10.10.2.1/32
-R-KAL-CORE-01 Uplink: 103.125.42.134/30
+R-UTT-CORE-01 Loopback: 10.10.2.1/32
+R-UTT-CORE-01 Uplink: 103.125.42.134/30
 Management Network: 10.10.10.50-60 range
 ```
 

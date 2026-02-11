@@ -6,7 +6,7 @@ API কী জিনিস? সহজ ভাষায় বলতে গেল�
 
 এই চ্যাপ্টারে আমরা দেখব কীভাবে Python দিয়ে Nautobot-এর সাথে কথা বলতে হয়, কীভাবে ডেটা পড়তে হয়, কীভাবে নতুন জিনিস যোগ করতে হয়। শুরু করি PyNautobot দিয়ে।
 
-# চ্যাপ্টার ১৩: PyNautobot দিয়ে অটোমেশন (সম্পূর্ণ)
+## PyNautobot দিয়ে অটোমেশন
 
 SkyNets Bangladesh এখন ৫০ হাজার কাস্টমারে পৌঁছেছে। Nautobot এর ওয়েব UI দিয়ে সব কাজ করছে - ডিভাইস যোগ করা, আইপি এসাইন করা, রিপোর্ট দেখা। কিন্তু একদিন জাহাঙ্গীর সাহেব একটা সমস্যার মুখোমুখি হলেন।
 
@@ -18,7 +18,7 @@ SkyNets Bangladesh এখন ৫০ হাজার কাস্টমারে 
 
 জাহাঙ্গীর সাহেব বললেন, "এভাবে চলবে না। আমাদের অটোমেশন দরকার। Python স্ক্রিপ্ট লিখে Nautobot API দিয়ে কাজ করা যায়।"
 
-## PyNautobot - Python থেকে Nautobot
+### PyNautobot - Python থেকে Nautobot
 
 PyNautobot হলো একটা Python লাইব্রেরি যেটা Nautobot API এর সাথে কাজ করা সহজ করে দেয়।
 
@@ -48,20 +48,20 @@ Write Enabled: ✓
 
 ⚠️ এটা পাসওয়ার্ডের মতো - কাউকে দেবেন না!
 
-## প্রথম Python স্ক্রিপ্ট
+### প্রথম Python স্ক্রিপ্ট
 
 `hello_nautobot.py` ফাইল তৈরি করুন:
 
 ```python
 from pynautobot import api
 
-# Nautobot connection
+## Nautobot connection
 nb = api(
     url="https://nautobot.skynets.bd",
     token="0123456789abcdef0123456789abcdef01234567"
 )
 
-# Test connection
+## Test connection
 print(f"Connected to Nautobot: {nb.version}")
 ```
 
@@ -73,7 +73,7 @@ python hello_nautobot.py
 
 আউটপুট: `Connected to Nautobot: 3.0.0`
 
-## ডেটা রিড করা - সব ডিভাইস দেখা
+### ডেটা রিড করা - সব ডিভাইস দেখা
 
 `list_devices.py`:
 
@@ -82,13 +82,13 @@ from pynautobot import api
 
 nb = api(url="https://nautobot.skynets.bd", token="your-token")
 
-# সব ডিভাইস নিয়ে আসুন
+## সব ডিভাইস নিয়ে আসুন
 devices = nb.dcim.devices.all()
 
 print(f"Total devices: {len(devices)}\n")
 
-# প্রতিটা ডিভাইসের নাম এবং লোকেশন
-for device in devices[:10]:  # প্রথম ১০টা
+## প্রতিটা ডিভাইসের নাম এবং লোকেশন
+for device in devices[:10]:  ## প্রথম ১০টা
     print(f"- {device.name} at {device.location}")
 ```
 
@@ -103,18 +103,18 @@ Total devices: 152
 ...
 ```
 
-## ফিল্টার করা - নির্দিষ্ট ডিভাইস খুঁজা
+### ফিল্টার করা - নির্দিষ্ট ডিভাইস খুঁজা
 
 ```python
-# শুধু Mirpur POP এর ডিভাইস
+## শুধু Mirpur POP এর ডিভাইস
 mirpur_devices = nb.dcim.devices.filter(location="Mirpur POP")
 print(f"Mirpur devices: {len(mirpur_devices)}")
 
-# শুধু Core Routers
+## শুধু Core Routers
 core_routers = nb.dcim.devices.filter(role="Core Router")
 print(f"Core Routers: {len(core_routers)}")
 
-# একাধিক ফিল্টার
+## একাধিক ফিল্টার
 active_switches = nb.dcim.devices.filter(
     role="Access Switch",
     status="active",
@@ -122,7 +122,7 @@ active_switches = nb.dcim.devices.filter(
 )
 ```
 
-## আইপি ইউটিলাইজেশন রিপোর্ট
+### আইপি ইউটিলাইজেশন রিপোর্ট
 
 জাহাঙ্গীর সাহেব প্রতি সপ্তাহে জানতে চান কোন প্রিফিক্স প্রায় ফুল।
 
@@ -139,7 +139,7 @@ print("IP Utilization Report")
 print("=" * 60)
 
 for prefix in prefixes:
-    if "/24" in str(prefix.prefix):  # শুধু /24 দেখাই
+    if "/24" in str(prefix.prefix):  ## শুধু /24 দেখাই
         util = prefix.utilization if hasattr(prefix, 'utilization') else 0
         
         print(f"\nPrefix: {prefix.prefix}")
@@ -168,7 +168,7 @@ Prefix: 103.125.48.0/24
   Utilization: 45%
 ```
 
-## নতুন ডিভাইস যোগ করা
+### নতুন ডিভাইস যোগ করা
 
 একটা ডিভাইস:
 
@@ -190,7 +190,7 @@ new_device = nb.dcim.devices.create(
 print(f"✓ Created: {new_device.name}")
 ```
 
-## বাল্ক ডিভাইস তৈরি - আসিফের সমস্যা solve
+### বাল্ক ডিভাইস তৈরি - আসিফের সমস্যা solve
 
 CSV ফাইল থেকে:
 
@@ -232,7 +232,7 @@ with open('new_devices.csv', 'r') as f:
 
 ২০টা ডিভাইস ২ মিনিটে তৈরি! ২ ঘন্টার কাজ ২ মিনিটে শেষ।
 
-## IP Address Assignment
+### IP Address Assignment
 
 নতুন ডিভাইসে আইপি এসাইন করা:
 
@@ -241,15 +241,15 @@ from pynautobot import api
 
 nb = api(url="https://nautobot.skynets.bd", token="your-token")
 
-# ডিভাইস খুঁজুন
+## ডিভাইস খুঁজুন
 device = nb.dcim.devices.get(name="SW-DN-GUL-ACC-26")
 
-# Interface খুঁজুন (বা তৈরি করুন)
-# প্রথমে দেখুন vlan10 interface আছে কিনা
+## Interface খুঁজুন (বা তৈরি করুন)
+## প্রথমে দেখুন vlan10 interface আছে কিনা
 interfaces = nb.dcim.interfaces.filter(device_id=device.id, name="vlan10")
 
 if not interfaces:
-    # নেই তো তৈরি করুন
+    ## নেই তো তৈরি করুন
     interface = nb.dcim.interfaces.create(
         device=device.id,
         name="vlan10",
@@ -261,9 +261,9 @@ if not interfaces:
 else:
     interface = interfaces[0]
 
-# এখন IP assign করুন
+## এখন IP assign করুন
 new_ip = nb.ipam.ip_addresses.create(
-    address="10.10.12.26/24",  # Gulshan POP management network
+    address="10.10.12.26/24",  ## Gulshan POP management network
     status="active",
     assigned_object_type="dcim.interface",
     assigned_object_id=interface.id,
@@ -274,7 +274,7 @@ new_ip = nb.ipam.ip_addresses.create(
 print(f"✓ IP assigned: {new_ip.address}")
 ```
 
-## ডেটা আপডেট করা
+### ডেটা আপডেট করা
 
 বিদ্যমান ডিভাইস চেঞ্জ করা:
 
@@ -283,10 +283,10 @@ from pynautobot import api
 
 nb = api(url="https://nautobot.skynets.bd", token="your-token")
 
-# ডিভাইস খুঁজুন
+## ডিভাইস খুঁজুন
 device = nb.dcim.devices.get(name="SW-DN-GUL-ACC-26")
 
-# Status আপডেট করুন
+## Status আপডেট করুন
 device.status = "offline"
 device.comments = "Under maintenance - scheduled completion: 2027-02-15"
 device.save()
@@ -301,7 +301,7 @@ from pynautobot import api
 
 nb = api(url="https://nautobot.skynets.bd", token="your-token")
 
-# প্রথমে ট্যাগ খুঁজুন (বা তৈরি করুন)
+## প্রথমে ট্যাগ খুঁজুন (বা তৈরি করুন)
 try:
     production_tag = nb.extras.tags.get(name="production")
 except:
@@ -311,11 +311,11 @@ except:
         description="Production equipment"
     )
 
-# গুলশান পপের সব ডিভাইস
+## গুলশান পপের সব ডিভাইস
 gulshan_devices = nb.dcim.devices.filter(location="Gulshan POP")
 
 for device in gulshan_devices:
-    # Check if tag already exists
+    ## Check if tag already exists
     tag_names = [tag.name for tag in device.tags]
     if "production" not in tag_names:
         device.tags.append(production_tag)
@@ -323,7 +323,7 @@ for device in gulshan_devices:
         print(f"✓ Tagged: {device.name}")
 ```
 
-## ডেইলি রিপোর্ট স্ক্রিপ্ট
+### ডেইলি রিপোর্ট স্ক্রিপ্ট
 
 আসিফ প্রতিদিন সকালে একটা রিপোর্ট চায়। এখন অটোমেট করা যাক।
 
@@ -340,8 +340,8 @@ print(f"SkyNets Bangladesh - Daily Network Report")
 print(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 print("=" * 70)
 
-# 1. Overall Statistics
-print("\n📊 OVERALL STATISTICS")
+## 1. Overall Statistics
+print("\n OVERALL STATISTICS")
 print("-" * 70)
 
 total_devices = nb.dcim.devices.count()
@@ -352,8 +352,8 @@ print(f"Total Devices: {total_devices}")
 print(f"  ├─ Active: {active_devices}")
 print(f"  └─ Offline: {offline_devices}")
 
-# 2. Per-Location Breakdown
-print("\n🏢 LOCATION BREAKDOWN")
+## 2. Per-Location Breakdown
+print("\n LOCATION BREAKDOWN")
 print("-" * 70)
 
 locations = nb.dcim.locations.filter(location_type="POP")
@@ -361,8 +361,8 @@ for location in locations:
     device_count = nb.dcim.devices.filter(location=location.name).count()
     print(f"{location.name}: {device_count} devices")
 
-# 3. IP Utilization Alerts
-print("\n⚠️  IP UTILIZATION ALERTS")
+## 3. IP Utilization Alerts
+print("\n  IP UTILIZATION ALERTS")
 print("-" * 70)
 
 prefixes = nb.ipam.prefixes.all()
@@ -378,29 +378,29 @@ for prefix in prefixes:
 
 if high_util:
     for item in high_util:
-        print(f"⚠️  {item['prefix']} at {item['location']}: {item['utilization']}%")
+        print(f" {item['prefix']} at {item['location']}: {item['utilization']}%")
 else:
     print("✓ All prefixes have healthy utilization")
 
-# 4. Devices Under Maintenance
+## 4. Devices Under Maintenance
 print("\n🔧 MAINTENANCE STATUS")
 print("-" * 70)
 
 maintenance_devices = nb.dcim.devices.filter(tags="maintenance")
 if maintenance_devices:
-    print(f"⚠️  {len(maintenance_devices)} devices under maintenance:")
+    print(f" {len(maintenance_devices)} devices under maintenance:")
     for device in maintenance_devices:
         print(f"   - {device.name}")
 else:
     print("✓ No devices under maintenance")
 
-# 5. Data Quality Issues
-print("\n🔍 DATA QUALITY CHECK")
+## 5. Data Quality Issues
+print("\n DATA QUALITY CHECK")
 print("-" * 70)
 
 no_serial = nb.dcim.devices.filter(status="active", serial="")
 if no_serial:
-    print(f"⚠️  {len(no_serial)} active devices missing serial numbers")
+    print(f" {len(no_serial)} active devices missing serial numbers")
 else:
     print("✓ All active devices have serial numbers")
 
@@ -417,13 +417,13 @@ SkyNets Bangladesh - Daily Network Report
 Generated: 2027-02-09 09:00:00
 ======================================================================
 
-📊 OVERALL STATISTICS
+OVERALL STATISTICS
 ----------------------------------------------------------------------
 Total Devices: 152
   ├─ Active: 148
   └─ Offline: 4
 
-🏢 LOCATION BREAKDOWN
+LOCATION BREAKDOWN
 ----------------------------------------------------------------------
 Mirpur POP: 28 devices
 Uttara POP: 22 devices
@@ -431,25 +431,25 @@ Gulshan POP: 24 devices
 Banani POP: 18 devices
 ...
 
-⚠️  IP UTILIZATION ALERTS
+  IP UTILIZATION ALERTS
 ----------------------------------------------------------------------
-⚠️  103.125.40.0/24 at Mirpur POP: 92%
-⚠️  103.125.48.0/24 at Gulshan POP: 84%
+  103.125.40.0/24 at Mirpur POP: 92%
+  103.125.48.0/24 at Gulshan POP: 84%
 
-🔧 MAINTENANCE STATUS
+ MAINTENANCE STATUS
 ----------------------------------------------------------------------
 ✓ No devices under maintenance
 
-🔍 DATA QUALITY CHECK
+ DATA QUALITY CHECK
 ----------------------------------------------------------------------
-⚠️  3 active devices missing serial numbers
+  3 active devices missing serial numbers
 
 ======================================================================
 Report completed successfully
 ======================================================================
 ```
 
-### রিপোর্ট অটোমেট করা
+##### রিপোর্ট অটোমেট করা
 
 **Windows Task Scheduler:**
 
@@ -464,13 +464,13 @@ Report completed successfully
 **Linux Cron:**
 
 ```bash
-# crontab -e
+## crontab -e
 0 8 * * * /usr/bin/python3 /home/skynets/scripts/daily_report.py > /home/skynets/reports/daily_$(date +\%Y\%m\%d).txt
 ```
 
 এখন প্রতিদিন সকাল ৮টায় অটোমেটিক রিপোর্ট জেনারেট হবে।
 
-## Error Handling - ভুল সামলানো
+### Error Handling - ভুল সামলানো
 
 স্ক্রিপ্ট লেখার সময় Error Handling করা জরুরি।
 
@@ -479,7 +479,7 @@ from pynautobot import api
 
 nb = api(url="https://nautobot.skynets.bd", token="your-token")
 
-# নিরাপদ উপায়ে ডিভাইস খুঁজুন
+## নিরাপদ উপায়ে ডিভাইস খুঁজুন
 try:
     device = nb.dcim.devices.get(name="SW-DN-MIR-ACC-99")
     print(f"Found: {device.name}")
@@ -489,19 +489,19 @@ except Exception as e:
     print(f"Error: {e}")
 ```
 
-## Best Practices
+### Best Practices
 
 **১. Token সিকিউরিটি - হার্ডকোড করবেন না:**
 
 ```python
-# ❌ খারাপ
+##  খারাপ
 token = "abc123..."
 
-# ✅ ভালো - Environment variable
+##  ভালো - Environment variable
 import os
 token = os.environ.get('NAUTOBOT_TOKEN')
 
-# অথবা config ফাইল
+## অথবা config ফাইল
 import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -531,41 +531,8 @@ import time
 
 for device in large_list:
     process_device(device)
-    time.sleep(0.1)  # ১০০ms delay
+    time.sleep(0.1)  ## ১০০ms delay
 ```
-
-## চ্যাপ্টার সারাংশ
-
-এই চ্যাপ্টারে আমরা শিখলাম:
-
-**PyNautobot Setup:**
-- Python ইনস্টল করা
-- PyNautobot ইনস্টল করা
-- API Token তৈরি করা
-
-**ডেটা রিড করা:**
-- সব ডিভাইস লিস্ট করা
-- ফিল্টার করে নির্দিষ্ট ডিভাইস খুঁজা
-- আইপি ইউটিলাইজেশন রিপোর্ট
-
-**ডেটা যোগ করা:**
-- একটা ডিভাইস তৈরি
-- CSV থেকে বাল্ক ডিভাইস ইমপোর্ট
-- আইপি এসাইন করা
-
-**ডেটা আপডেট:**
-- ডিভাইস স্ট্যাটাস চেঞ্জ করা
-- বাল্ক ট্যাগিং
-
-**অটোমেশন:**
-- ডেইলি রিপোর্ট স্ক্রিপ্ট
-- Task scheduler দিয়ে অটোমেট করা
-
-**Best Practices:**
-- Error handling
-- Token সিকিউরিটি
-- Logging
-- Rate limiting
 
 SkyNets Bangladesh এখন Nautobot কে অটোমেট করতে পারছে। আসিফ আর ম্যানুয়ালি ক্লিক করে সময় নষ্ট করে না। একটা স্ক্রিপ্ট লিখে সে ৫০টা ডিভাইস ৫ মিনিটে যোগ করতে পারে।
 
