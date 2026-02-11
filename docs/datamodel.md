@@ -6,7 +6,8 @@
 
 Nautobot 3.0 এ সবচেয়ে বড় পরিবর্তন হলো এর modular architecture। পুরো সিস্টেমকে কয়েকটা Core Apps-এ ভাগ করা হয়েছে:
 
-**Core Apps:**
+**কোর অ্যাপ্লিকেশন:**
+
 - **Organization**: Tenants, Teams, Locations
 - **DCIM** (Data Center Infrastructure Management): Devices, Racks, Cables
 - **IPAM** (IP Address Management): IP Addresses, Prefixes, VLANs
