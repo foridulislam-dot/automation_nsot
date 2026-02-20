@@ -1,6 +1,6 @@
 আগের চ্যাপ্টারে আমরা Nautobot 3.0 এর ডেটা মডেল বুঝলাম - Organization, DCIM, IPAM, Circuits, Extras। এখন সময় এসেছে হাতে-কলমে কাজ শুরু করার। এই চ্যাপ্টারে আমরা দেখব কীভাবে Nautobot এর ওয়েব UI ব্যবহার করে actual ডেটা এন্ট্রি করতে হয়।
 
-Nirvor Communications Bangladesh এর NOC টিম এখন তাদের মিরপুর এবং উত্তরা পপের সম্পূর্ণ নেটওয়ার্ক Nautobot এ ডকুমেন্ট করবে। তাদের সাথে একসাথে আমরাও শিখব। শুরু করা যাক।
+Nirvor Communication এর NOC টিম এখন তাদের মিরপুর এবং উত্তরা পপের সম্পূর্ণ নেটওয়ার্ক Nautobot এ ডকুমেন্ট করবে। তাদের সাথে একসাথে আমরাও শিখব। শুরু করা যাক।
 
 ### Nautobot 3.0 UI Overview
 
@@ -11,7 +11,7 @@ Nirvor Communications Bangladesh এর NOC টিম এখন তাদের 
 ব্রাউজারে যান:
 
 ```
-https://nautobot.nirvorcommunications.bd
+https://nautobot.nirvor.bd
 ```
 
 লগইন করুন:
@@ -159,7 +159,7 @@ Latitude: 23.8103
 Longitude: 90.3654
 Contact Name: Jahangir Khan
 Contact Phone: +880 1712-345678
-Contact Email: jahangir@nirvorcommunications.bd
+Contact Email: jahangir@nirvor.bd
 Time Zone: Asia/Dhaka
 Description: Primary POP serving Mirpur area. Approximately 4000 customers.
 Comments: 
@@ -200,7 +200,7 @@ Latitude: 23.8759
 Longitude: 90.3795
 Contact Name: Asif Rahman
 Contact Phone: +880 1811-234567
-Contact Email: asif@nirvorcommunications.bd
+Contact Email: asif@nirvor.bd
 Time Zone: Asia/Dhaka
 Description: Secondary POP serving Uttara area. Approximately 4000 customers.
 ```
@@ -495,7 +495,7 @@ Face: Front
 
 Status: Active
 
-Tenant: (খালি রাখুন - Nirvor Communications একটাই organization)
+Tenant: (খালি রাখুন - Nirvor Communication একটাই organization)
 Platform: (খালি রাখুন - এটা OS platform এর জন্য, optional)
 
 Serial Number: ABC1234MIR001
@@ -720,7 +720,7 @@ Found 3 objects to import:
 
 ```
 Name: Global
-Description: Primary IP namespace for Nirvor Communications Bangladesh
+Description: Primary IP namespace for Nirvor Communication Bangladesh
 ```
 
 **Create** করুন।
@@ -738,7 +738,7 @@ Prefix: 10.10.0.0/16
 Type: Container
 Status: Active
 Namespace: Global
-Description: Internal management network for all Nirvor Communications equipment
+Description: Internal management network for all Nirvor Communication equipment
 ```
 
 **Create and Add Another** করুন।
@@ -776,7 +776,7 @@ Assigned Object:
   - Device: R-DN-MIR-CORE-01
   - Interface: ether1 (ড্রপডাউনে দেখাবে)
 
-DNS Name: r-mir-core-01.nirvorcommunications.bd
+DNS Name: r-mir-core-01.nirvor.bd
 Description: Management loopback for Mirpur core router
 ```
 
@@ -821,7 +821,7 @@ Assigned Object:
   - Device: SW-DN-MIR-DIST-01
   - Interface: vlan10
 
-DNS Name: sw-mir-dist-01.nirvorcommunications.bd
+DNS Name: sw-mir-dist-01.nirvor.bd
 ```
 
 **Create** করুন।
@@ -839,7 +839,7 @@ DNS Name: sw-mir-dist-01.nirvorcommunications.bd
 
 #### VLAN Management - Layer 2 সেগমেন্টেশন
 
-Nirvor Communications Bangladesh এর নেটওয়ার্কে বিভিন্ন ধরনের ট্রাফিক আছে - ম্যানেজমেন্ট, কাস্টমার, আপলিংক। এগুলো আলাদা করার জন্য VLAN ব্যবহার করা হয়।
+Nirvor Communication এর নেটওয়ার্কে বিভিন্ন ধরনের ট্রাফিক আছে - ম্যানেজমেন্ট, কাস্টমার, আপলিংক। এগুলো আলাদা করার জন্য VLAN ব্যবহার করা হয়।
 
 ##### VLAN Groups তৈরি করা (অপশনাল কিন্তু recommended)
 
@@ -1095,7 +1095,7 @@ R-DN-MIR-CORE-01 (sfp-sfpplus2)
 
 ### Provider এবং Circuit সেটআপ
 
-Nirvor Communications Bangladesh এর upstream connectivity BTCL থেকে। চলুন এটা ডকুমেন্ট করি।
+Nirvor Communication এর upstream connectivity BTCL থেকে। চলুন এটা ডকুমেন্ট করি।
 
 #### Provider তৈরি করা
 
@@ -1178,7 +1178,7 @@ Description: BTCL side termination at their Mirpur exchange
 
 **Create and Add Another** করুন।
 
-**Termination Z (Nirvor Communications Bangladesh Side):**
+**Termination Z (Nirvor Communication Side):**
 
 ```
 Circuit: BTCL-MIR-001
@@ -1271,7 +1271,7 @@ Nautobot automatically duplicate names prevent করে, কিন্তু dou
 
 ### Common Mistakes এবং কীভাবে এড়াবেন
 
-Nirvor Communications Bangladesh এর NOC টিম প্রথমে কিছু ভুল করেছিল। চলুন সেগুলো দেখি যাতে আপনি এড়াতে পারেন।
+Nirvor Communication এর NOC টিম প্রথমে কিছু ভুল করেছিল। চলুন সেগুলো দেখি যাতে আপনি এড়াতে পারেন।
 
 #### Mistake 1: Location Hierarchy ভুল
 
@@ -1382,13 +1382,13 @@ Device status "Decommissioned" করা হয়েছে। অথবা এ�
 
 ---
 
-### Naming Convention Standards - Nirvor Communications Bangladesh এর Example
+### Naming Convention Standards - Nirvor Communication এর Example
 
-Nirvor Communications Bangladesh একটা documented naming convention তৈরি করেছে। এটা একটা Word ডকুমেন্টে রাখা আছে এবং সব team members কে দেওয়া হয়েছে।
+Nirvor Communication একটা documented naming convention তৈরি করেছে। এটা একটা Word ডকুমেন্টে রাখা আছে এবং সব team members কে দেওয়া হয়েছে।
 
 ```
 ========================================
-Nirvor Communications Bangladesh Naming Convention
+Nirvor Communication Naming Convention
 Version 1.0 - Updated: February 2025
 ========================================
 
@@ -1455,8 +1455,8 @@ Management IPs:
   Access Switches: 10.10.X.21-99/24
 
 DNS Naming:
-  Format: [device-name].nirvorcommunications.bd
-  Example: r-mir-core-01.nirvorcommunications.bd
+  Format: [device-name].nirvor.bd
+  Example: r-mir-core-01.nirvor.bd
 
 5. VLANs
 --------
@@ -1508,7 +1508,7 @@ Avoid abbreviations in location names.
 
 #### Monthly Data Snapshot
 
-Nirvor Communications Bangladesh প্রতি মাসের ১ তারিখে একটা snapshot নেয়:
+Nirvor Communication প্রতি মাসের ১ তারিখে একটা snapshot নেয়:
 
 ```bash
 # Create backup directory
@@ -1517,12 +1517,12 @@ mkdir -p /backup/nautobot/monthly/2025-02
 # Export all key data types
 # Devices
 curl -H "Authorization: Token YOUR_TOKEN" \
-  "https://nautobot.nirvorcommunications.bd/api/dcim/devices/?limit=0&format=csv" \
+  "https://nautobot.nirvor.bd/api/dcim/devices/?limit=0&format=csv" \
   > /backup/nautobot/monthly/2025-02/devices.csv
 
 # IP Addresses
 curl -H "Authorization: Token YOUR_TOKEN" \
-  "https://nautobot.nirvorcommunications.bd/api/ipam/ip-addresses/?limit=0&format=csv" \
+  "https://nautobot.nirvor.bd/api/ipam/ip-addresses/?limit=0&format=csv" \
   > /backup/nautobot/monthly/2025-02/ip-addresses.csv
 
 # (similarly for other object types)
@@ -1577,4 +1577,4 @@ curl -H "Authorization: Token YOUR_TOKEN" \
 - Naming conventions
 - Export/Backup
 
-Nirvor Communications এখন তাদের মিরপুর এবং উত্তরা পপের প্রায় সম্পূর্ণ নেটওয়ার্ক Nautobot এ ডকুমেন্ট করে ফেলেছে। পরের চ্যাপ্টারে আমরা দেখব কীভাবে এই setup কে scale করা যায় যখন নতুন পপ যুক্ত হয়, আরো ডিভাইস আসে, এবং কীভাবে advanced features ব্যবহার করতে হয়।
+Nirvor Communication এখন তাদের মিরপুর এবং উত্তরা পপের প্রায় সম্পূর্ণ নেটওয়ার্ক Nautobot এ ডকুমেন্ট করে ফেলেছে। পরের চ্যাপ্টারে আমরা দেখব কীভাবে এই setup কে scale করা যায় যখন নতুন পপ যুক্ত হয়, আরো ডিভাইস আসে, এবং কীভাবে advanced features ব্যবহার করতে হয়।
