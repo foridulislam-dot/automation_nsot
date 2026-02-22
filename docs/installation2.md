@@ -230,7 +230,7 @@ NAUTOBOT_SUPERUSER_NAME=admin
 NAUTOBOT_SUPERUSER_EMAIL=admin@nirvor.bd
 ```
 
-> ⚠️ **সতর্কতা:** Redis password-এ `@` চিহ্ন থাকলে connection URL-এ `%40` দিয়ে replace করতে হবে। যেমন `nirvorcommunication@Redis2025$` হবে `nirvorcommunication%40Redis2025$`। নাহলে Celery connect করতে পারবে না।
+> ⚠️ **সতর্কতা:** Redis password-এ `@` চিহ্ন থাকলে connection URL-এ `%40` দিয়ে replace করতে হবে। যেমন `nirvorn@Redis2025$` হবে `nirvor%40Redis2025$`। নাহলে Celery connect করতে পারবে না।
 
 `environments/creds.env` তৈরি করুন (এই ফাইল কখনো Git-এ commit করবেন না!):
 
@@ -380,8 +380,7 @@ docker exec nautobot-docker-compose-db-1 \
 
 এই পদ্ধতিতে Docker ছাড়া সরাসরি সার্ভারে Nautobot ইনস্টল করা হয়। Docker ব্যবহারের সুযোগ না থাকলে বা সম্পূর্ণ নিয়ন্ত্রণ চাইলে এই পদ্ধতি ব্যবহার করুন।
 
-https://docs.nautobot.com/projects/core/en/stable/user-guide/administration/installation/nautobot/
-
+https://aiwithr.github.io/automation_nsot/installation/
 ---
 
 ### Plugin ইনস্টলেশন
