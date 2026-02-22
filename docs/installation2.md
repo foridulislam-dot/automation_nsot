@@ -115,7 +115,7 @@ cat /opt/nautobot/CREDENTIALS.txt
 SSH করে সার্ভারে লগইন করুন:
 
 ```bash
-ssh admin@nautobot.nirvorcommunication.bd
+ssh admin@nautobot.nirvor.bd
 ```
 
 সিস্টেম আপডেট করুন:
@@ -227,10 +227,10 @@ NAUTOBOT_CACHES_LOCATION=redis://:your_redis_password@redis:6379/1
 # Superuser
 NAUTOBOT_CREATE_SUPERUSER=true
 NAUTOBOT_SUPERUSER_NAME=admin
-NAUTOBOT_SUPERUSER_EMAIL=admin@Nirvor Communication.bd
+NAUTOBOT_SUPERUSER_EMAIL=admin@Nirvor.bd
 ```
 
-> ⚠️ **সতর্কতা:** Redis password-এ `@` চিহ্ন থাকলে connection URL-এ `%40` দিয়ে replace করতে হবে। যেমন `nirvorcommunication@Redis2025$` হবে `nirvorcommunication%40Redis2025$`। নাহলে Celery connect করতে পারবে না।
+> ⚠️ **সতর্কতা:** Redis password-এ `@` চিহ্ন থাকলে connection URL-এ `%40` দিয়ে replace করতে হবে। যেমন `nirvorn@Redis2025$` হবে `nirvor%40Redis2025$`। নাহলে Celery connect করতে পারবে না।
 
 `environments/creds.env` তৈরি করুন (এই ফাইল কখনো Git-এ commit করবেন না!):
 
@@ -367,7 +367,7 @@ docker exec -it nautobot-docker-compose-nautobot-1 nautobot-server shell
 
 # নতুন superuser তৈরি করুন
 docker exec -it nautobot-docker-compose-nautobot-1 \
-  nautobot-server createsuperuser --username newuser --email user@Nirvor Communication.bd
+  nautobot-server createsuperuser --username newuser --email user@Nirvor.bd
 
 # Database backup নিন
 docker exec nautobot-docker-compose-db-1 \
