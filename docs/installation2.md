@@ -227,7 +227,7 @@ NAUTOBOT_CACHES_LOCATION=redis://:your_redis_password@redis:6379/1
 # Superuser
 NAUTOBOT_CREATE_SUPERUSER=true
 NAUTOBOT_SUPERUSER_NAME=admin
-NAUTOBOT_SUPERUSER_EMAIL=admin@Nirvor Communication.bd
+NAUTOBOT_SUPERUSER_EMAIL=admin@nirvorcommunication.bd
 ```
 
 > ⚠️ **সতর্কতা:** Redis password-এ `@` চিহ্ন থাকলে connection URL-এ `%40` দিয়ে replace করতে হবে। যেমন `nirvorcommunication@Redis2025$` হবে `nirvorcommunication%40Redis2025$`। নাহলে Celery connect করতে পারবে না।
@@ -367,7 +367,7 @@ docker exec -it nautobot-docker-compose-nautobot-1 nautobot-server shell
 
 # নতুন superuser তৈরি করুন
 docker exec -it nautobot-docker-compose-nautobot-1 \
-  nautobot-server createsuperuser --username newuser --email user@Nirvor Communication.bd
+  nautobot-server createsuperuser --username newuser --email user@nirvorcommunication.bd
 
 # Database backup নিন
 docker exec nautobot-docker-compose-db-1 \
