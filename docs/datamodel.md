@@ -1,6 +1,6 @@
-আগের চ্যাপ্টারে আমরা Nautobot 3.0 ইনস্টল করলাম। SkyNets Bangladesh এর NOC টিম এখন একটা চালু Nautobot instance পেয়েছে। কিন্তু এখনও কোনো ডেটা নেই - খালি একটা সিস্টেম। ডেটা এন্ট্রি শুরু করার আগে বুঝতে হবে Nautobot কীভাবে নেটওয়ার্ক ডেটা স্টোর করে, কীভাবে বিভিন্ন জিনিস একে অপরের সাথে সম্পর্কিত।
+আগের চ্যাপ্টারে আমরা Nautobot 3.0 ইনস্টল করলাম। Nirvor Communication এর NOC টিম এখন একটা চালু Nautobot instance পেয়েছে। কিন্তু এখনও কোনো ডেটা নেই - খালি একটা সিস্টেম। ডেটা এন্ট্রি শুরু করার আগে বুঝতে হবে Nautobot কীভাবে নেটওয়ার্ক ডেটা স্টোর করে, কীভাবে বিভিন্ন জিনিস একে অপরের সাথে সম্পর্কিত।
 
-এই চ্যাপ্টারে আমরা Nautobot 3.0 এর ডেটা মডেল বুঝব। এটা একটু থিওরি মনে হতে পারে, কিন্তু এই ফাউন্ডেশন না বুঝলে পরে ডেটা এন্ট্রি করতে গিয়ে সমস্যা হবে। SkyNets Bangladesh এর নেটওয়ার্ককে উদাহরণ হিসেবে ব্যবহার করে প্রতিটা কনসেপ্ট ব্যাখ্যা করব।
+এই চ্যাপ্টারে আমরা Nautobot 3.0 এর ডেটা মডেল বুঝব। এটা একটু থিওরি মনে হতে পারে, কিন্তু এই ফাউন্ডেশন না বুঝলে পরে ডেটা এন্ট্রি করতে গিয়ে সমস্যা হবে। Nirvor Communication এর নেটওয়ার্ককে উদাহরণ হিসেবে ব্যবহার করে প্রতিটা কনসেপ্ট ব্যাখ্যা করব।
 
 ### Nautobot 3.0 এর নতুন আর্কিটেকচার
 
@@ -30,10 +30,10 @@ Organization App হলো Nautobot এর ভিত্তি। এখানে
 
 **Nautobot 3.0 এ এখন:** Locations (hierarchical, nestable)
 
-SkyNet Bangladesh এর নেটওয়ার্ক ঢাকা নর্থ জোনে ছড়িয়ে আছে। তাদের এই স্ট্রাকচার:
+Nirvor Communication এর নেটওয়ার্ক ঢাকা নর্থ জোনে ছড়িয়ে আছে। তাদের এই স্ট্রাকচার:
 
 ```
-SkyNet Bangladesh Network
+Nirvor Communication Network
   └── Dhaka North Zone
        ├── Mirpur Cluster
        │    └── Mirpur POP
@@ -66,10 +66,6 @@ Location Type: POP
   - Nestable: Yes
   - Parent: Cluster
 
-Location Type: Rack
-  - Description: Equipment rack
-  - Nestable: No
-  - Parent: POP
 ```
 
 **Actual Locations:**
@@ -94,9 +90,10 @@ Location: Mirpur POP
   - Address: House 25, Road 10, Mirpur-12, Dhaka-1216
   - GPS: 23.8103, 90.3654
 
-Location: Rack A
-  - Type: Rack
-  - Parent: Mirpur POP
+Rack (DCIM Object):
+
+Rack: Rack A
+  - Location: Mirpur POP
   - Status: Active
   - Height: 42U
 ```
@@ -112,16 +109,16 @@ Location: Rack A
 
 যদি আপনার একাধিক ব্যবসা বা ব্র্যান্ড থাকে, তাহলে Tenants ব্যবহার করবেন।
 
-SkyNet Bangladesh এর দুটো ব্র্যান্ড আছে:
-- SkyNet (Residential)
-- SkyNet Business (Corporate)
+Nirvor Communication এর দুটো ব্র্যান্ড আছে:
+- Nirvor Communicatio (Residential)
+- Nirvor Communication (Corporate)
 
 ```
-Tenant: SkyNet Residential
+Tenant: Nirvor Communication Residential
   - Description: Residential broadband services
   - Group: Consumer Services
 
-Tenant: SkyNet Business
+Tenant: Nirvor Communication Business
   - Description: Corporate connectivity solutions
   - Group: Enterprise Services
 ```
@@ -134,7 +131,7 @@ Tenant: SkyNet Business
 
 বড় organization এ বিভিন্ন টিম থাকে। Nautobot 3.0 এ Teams দিয়ে সেটা manage করা যায়।
 
-SkyNet Bangladesh এর টিম:
+Nirvor Communication এর টিম:
 
 ```
 Team: NOC Team
@@ -160,7 +157,7 @@ DCIM (Data Center Infrastructure Management) হলো Nautobot এর সবচ
 
 কোনো device যোগ করার আগে তার "type" define করতে হয়। Device Type হলো একটা blueprint বা template।
 
-SkyNet Bangladesh MikroTik router ব্যবহার করে। তাদের main model হলো CCR2004-1G-12S+2XS।
+Nirvor Communication MikroTik router ব্যবহার করে। তাদের main model হলো CCR2004-1G-12S+2XS।
 
 ```
 Device Type: MikroTik CCR2004-1G-12S+2XS
@@ -206,7 +203,7 @@ Manufacturer: Cisco
 
 এখন actual devices তৈরি করা যাবে।
 
-SkyNet Bangladesh এর Mirpur POP এ একটা core router আছে:
+Nirvor Communication এর Mirpur POP এ একটা core router আছে:
 
 ```
 Device: R-DN-MIR-CORE-01
@@ -218,13 +215,13 @@ Device: R-DN-MIR-CORE-01
   - Face: Front
   - Status: Active
   - Serial Number: ABC1234MIR001
-  - Asset Tag: SKY-RTR-001
+  - Asset Tag: NIRVOR-RTR-001
   - Comments: Primary core router for Mirpur POP
 ```
 
 **Device Naming Convention:**
 
-SkyNet Bangladesh এর convention:
+Nirvor Communication এর convention:
 ```
 Format: [Type]-[Zone]-[Site]-[Role]-[Number]
 
@@ -253,7 +250,7 @@ Interface: sfp-sfpplus1
   - MTU: 1500
   - Speed: 10 Gbps
   - Description: "Uplink to BTCL"
-  - Mode: Access (না Trunk)
+  - Mode: Access (Trunk নয়)
 ```
 
 #### Cables - ফিজিক্যাল কানেকশন
@@ -275,7 +272,7 @@ Cable: CORE-TO-DIST-01
   - Type: Single-Mode Fiber (SMF)
   - Status: Connected
   - Color: Blue
-  - Length: 5 meters
+  - Length: 5 m
   - Label: CORE-TO-DIST-01
 ```
 
@@ -295,8 +292,8 @@ Rack: Rack A
   - Width: 19 inches
   - Height: 42U
   - Description: Primary equipment rack
-  - Outer Width: 600mm
-  - Outer Depth: 1000mm
+  - Outer Width: 600 mm
+  - Outer Depth: 1000 mm
 ```
 
 **Rack Elevation:**
@@ -327,13 +324,13 @@ Nautobot এ একটা visual rack elevation দেখা যায়। ক
 
 Nautobot 3.0 এ Namespace একটা নতুন ফিচার। এটা দিয়ে একই IP range বিভিন্ন context এ ব্যবহার করা যায়।
 
-**SkyNet Bangladesh এর ক্ষেত্রে:**
+**Nirvor Communication এর ক্ষেত্রে:**
 
 তাদের শুধু একটা namespace দরকার:
 
 ```
 Namespace: Global
-  - Description: Primary IP namespace for SkyNet Bangladesh
+  - Description: Primary IP namespace for Nirvor Communication
 ```
 
 **কখন একাধিক namespace লাগে?**
@@ -344,7 +341,7 @@ Namespace: Global
 
 Prefix হলো একটা IP subnet।
 
-SkyNet Bangladesh এর কাছে BTCL থেকে পাওয়া একটা /22 public IP block আছে:
+Nirvor Communication এর কাছে BTCL থেকে পাওয়া একটা /22 public IP block আছে:
 
 ```
 Prefix: 103.125.40.0/22
@@ -389,8 +386,24 @@ Parent: 103.125.40.0/22 (Container)
 
 Individual IP addresses assign করা হয় devices এর interfaces এ।
 
-Mirpur core router এর loopback IP:
+Management IP Space:
 
+```
+Prefix: 10.10.0.0/16
+  - Type: Container
+  - Status: Active
+  - Namespace: Global
+  - Description: Management IP space
+```
+Uplink & Infrastructure IPs:
+```
+Prefix: 103.125.42.128/25
+  - Type: Container
+  - Status: Active
+  - Namespace: Global
+  - Description: Uplink & Infrastructure IPs
+```
+Mirpur core router এর loopback IP:
 ```
 IP Address: 10.10.1.1/32
   - Status: Active
@@ -400,7 +413,7 @@ IP Address: 10.10.1.1/32
   - Assigned to:
     * Device: R-DN-MIR-CORE-01
     * Interface: lo0
-  - DNS Name: r-mir-core-01.skynet.bd
+  - DNS Name: r-mir-core-01.nirvor.bd
   - Description: Management loopback
 ```
 
@@ -415,15 +428,18 @@ IP Address: 103.125.42.130/30
   - Assigned to:
     * Device: R-DN-MIR-CORE-01
     * Interface: sfp-sfpplus1
-  - DNS Name: r-mir-uplink.skynet.bd
+  - DNS Name: r-mir-uplink.nirvor.bd
   - Description: BTCL uplink connection
 ```
+#### Summary
+
+Namespace Nautobot 3.0 এর IPAM মডেলের একটি গুরুত্বপূর্ণ অংশ। এটি overlapping IP design, multi-tenant architecture এবং VRF-based network কে পরিষ্কারভাবে manage করতে সাহায্য করে।
 
 #### VLANs - Layer 2 Segmentation
 
 VLAN দিয়ে একই physical network কে logical ভাগে আলাদা করা যায়।
 
-SkyNet Bangladesh এর VLAN structure:
+Nirvor Communication এর VLAN structure:
 
 ```
 VLAN 10: MGMT_MIRPUR
@@ -442,7 +458,7 @@ VLAN 100: RESIDENTIAL_MIR
   - Description: Residential customer traffic - Mirpur
 
 VLAN 200: CORPORATE
-  - Location: (খালি - সব সাইটে ব্যবহার হয়)
+  - Location: Global
   - Status: Active
   - Description: Corporate clients across all sites
 ```
@@ -455,7 +471,7 @@ VLAN 200: CORPORATE
 
 ### Circuits App - আপস্ট্রিম কানেক্টিভিটি
 
-যেকোনো ISP এর নিজের uplink provider থাকে। SkyNet Bangladesh BTCL থেকে ইন্টারনেট নেয়।
+যেকোনো ISP এর নিজের uplink provider থাকে। Nirvor Communication BTCL থেকে ইন্টারনেট নেয়।
 
 #### Providers
 
@@ -464,14 +480,14 @@ VLAN 200: CORPORATE
 ```
 Provider: BTCL
   - ASN: 17494
-  - Account Number: SKY-BTCL-2023-MIR
+  - Account Number: NIRVOR-BTCL-2023-MIR
   - Portal URL: https://isp.btcl.gov.bd
   - NOC Contact: +880 2-9555555
   - Admin Contact: noc@btcl.gov.bd
   - Comments: Primary upstream provider
 ```
 
-SkyNet এর একটা secondary provider ও আছে:
+Nirvor Communication এর একটা secondary provider ও আছে:
 
 ```
 Provider: Summit Communications
@@ -526,7 +542,7 @@ Termination A (Provider Side):
   - Upstream Speed: 5000 Mbps
   - Cross Connect ID: BTCL-XC-MIR-12345
 
-Termination Z (SkyNet Side):
+Termination Z (Nirvor Communication Side):
   - Side: Z
   - Location: Mirpur POP
   - Device: R-DN-MIR-CORE-01
@@ -553,7 +569,7 @@ Extras app হলো Nautobot এর "toolbox"। এখানে এমন জ�
 - একটা unified Roles system
 - Content Types দিয়ে নির্ধারণ করবেন কোথায় ব্যবহার হবে
 
-SkyNet Bangladesh এর Device Roles:
+Nirvor Communication এর Device Roles:
 
 ```
 Role: Core Router
@@ -601,7 +617,7 @@ Role: Critical Infrastructure
 - Offline
 - Retired
 
-SkyNet Bangladesh একটা custom status যোগ করেছে:
+Nirvor Communication একটা custom status যোগ করেছে:
 
 ```
 Status: Under Maintenance
@@ -614,7 +630,7 @@ Status: Under Maintenance
 
 Tags দিয়ে যেকোনো object categorize করা যায়।
 
-SkyNet এর কিছু tags:
+Nirvor Communication এর কিছু tags:
 
 ```
 Tag: production
@@ -650,7 +666,7 @@ Device: R-DN-MIR-CORE-02
 
 Nautobot এ যদি কোনো built-in field না থাকে, custom field তৈরি করুন।
 
-SkyNet Bangladesh এর দরকার warranty tracking:
+Nirvor Communication এর দরকার warranty tracking:
 
 ```
 Custom Field: Warranty Expiry Date
@@ -712,7 +728,7 @@ Device: SW-DN-MIR-ACC-01
 
 ### ডেটা মডেলের রিলেশনশিপ - সব কীভাবে যুক্ত
 
-এখন দেখি কীভাবে সব একসাথে কাজ করে। SkyNets Bangladesh এর Mirpur POP এর একটা সম্পূর্ণ উদাহরণ:
+এখন দেখি কীভাবে সব একসাথে কাজ করে। Nirvor Communication এর Mirpur POP এর একটা সম্পূর্ণ উদাহরণ:
 
 #### উদাহরণ: মিরপুর পপ এর সম্পূর্ণ ডেটা স্ট্রাকচার
 
@@ -762,13 +778,13 @@ Cable: CORE-TO-DIST-01
   - From: R-DN-MIR-CORE-01 → sfp-sfpplus2
   - To: SW-DN-MIR-DIST-01 → sfp1
   - Type: SMF
-  - Length: 5m
+  - Length: 5 m
 
 Cable: DIST-TO-ACC-01
   - From: SW-DN-MIR-DIST-01 → ether1
   - To: SW-DN-MIR-ACC-01 → ether24
   - Type: Cat6
-  - Length: 20m
+  - Length: 20 m
 ```
 
 **4. IP Addresses:**
@@ -777,18 +793,18 @@ Cable: DIST-TO-ACC-01
 10.10.1.1/32
   - Assigned to: R-DN-MIR-CORE-01 → lo0
   - Role: Loopback
-  - DNS: r-mir-core-01.skynet.bd
+  - DNS: r-mir-core-01.nirvor.bd
 
 103.125.42.130/30
   - Assigned to: R-DN-MIR-CORE-01 → sfp-sfpplus1
   - Role: Network
-  - DNS: r-mir-uplink.skynet.bd
+  - DNS: r-mir-uplink.nirvor.bd
   - Description: BTCL uplink
 
 10.10.10.11/24
   - Assigned to: SW-DN-MIR-DIST-01 → vlan10
   - VLAN: MGMT_MIRPUR
-  - DNS: sw-mir-dist-01.skynet.bd
+  - DNS: sw-mir-dist-01.nirvor.bd
 ```
 
 **5. VLANs:**
@@ -825,12 +841,12 @@ BTCL Provider
 [R-DN-MIR-CORE-01] sfp-sfpplus1 (103.125.42.130/30)
     | lo0 (10.10.1.1/32)
     |
-    | Cable: CORE-TO-DIST-01 (SMF, 5m)
+    | Cable: CORE-TO-DIST-01 (SMF, 5 m)
     | sfp-sfpplus2 ↔ sfp1
     ↓
 [SW-DN-MIR-DIST-01] vlan10 (10.10.10.11/24)
     |
-    | Cable: DIST-TO-ACC-01 (Cat6, 20m)
+    | Cable: DIST-TO-ACC-01 (Cat6, 20 m)
     | ether1 ↔ ether24
     ↓
 [SW-DN-MIR-ACC-01]
@@ -953,4 +969,4 @@ Response এ পুরো nested data একসাথে আসবে। অন�
 
 ---
 
-SkyNets Bangladesh এখন বুঝে গেছে তাদের নেটওয়ার্ক কীভাবে Nautobot এ রিপ্রেজেন্ট হবে। পরের চ্যাপ্টারে আমরা দেখব কীভাবে UI দিয়ে actual ডেটা এন্ট্রি করতে হয়। এভাবে একটু একটু করে তারা পুরো নেটওয়ার্ক Nautobot-এ ডকুমেন্ট করবে। শুরুতে সময় লাগবে, কিন্তু একবার হয়ে গেলে পরে সব সহজ হয়ে যায়। পাশাপাশি, থিওরি থেকে প্র্যাকটিসে পুরোপুরি নামা যাবে।
+Nirvor Communication এখন বুঝে গেছে তাদের নেটওয়ার্ক কীভাবে Nautobot এ রিপ্রেজেন্ট হবে। পরের চ্যাপ্টারে আমরা দেখব কীভাবে UI দিয়ে actual ডেটা এন্ট্রি করতে হয়। এভাবে একটু একটু করে তারা পুরো নেটওয়ার্ক Nautobot-এ ডকুমেন্ট করবে। শুরুতে সময় লাগবে, কিন্তু একবার হয়ে গেলে পরে সব সহজ হয়ে যায়। পাশাপাশি, থিওরি থেকে প্র্যাকটিসে পুরোপুরি নামা যাবে।

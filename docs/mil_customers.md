@@ -380,7 +380,6 @@ AI Bot: [Generates Ansible playbook]
 - ৩০০০-৫০০০টা ডিভাইস
 - ২০০+ টেকনিক্যাল টিম
 - Nationwide footprint
-- Regional expansion (Nepal, Bhutan?)
 
 ### এই লেভেলে কী ভিন্ন?
 
@@ -555,27 +554,27 @@ Version 5.0 (২০৩১?): Fully autonomous, Self-learning
 **Without Automation (১ লক্ষ কাস্টমার):**
 ```
 Manual operations:
-- 50 জন NOC টিম (₹25 লাখ/মাস)
+- 50 জন NOC টিম (25 লাখ/মাস)
 - Frequent human errors → outages → revenue loss
 - Slow deployment → delayed expansion
 - Poor customer satisfaction
 
-Annual cost: ₹3 কোটি (operations only)
-Revenue loss: ₹5 কোটি (downtime, slow growth)
-Total: ₹8 কোটি
+Annual cost: 3 কোটি (operations only)
+Revenue loss: 5 কোটি (downtime, slow growth)
+Total: 8 কোটি
 ```
 
 **With Automation (১ লক্ষ কাস্টমার):**
 ```
 Automated operations:
-- 20 জন specialized team (₹15 লাখ/মাস)
+- 20 জন specialized team (15 লাখ/মাস)
 - Minimal errors → less downtime
 - Fast deployment → rapid expansion
 - High customer satisfaction
 
-Annual cost: ₹5 কোটি (ops + automation platform)
-Revenue gain: ₹10 কোটি (growth, efficiency)
-Net benefit: ₹5 কোটি/year
+Annual cost: 5 কোটি (ops + automation platform)
+Revenue gain: 10 কোটি (growth, efficiency)
+Net benefit: 5 কোটি/year
 ```
 
 **ROI = ১০০%+ প্রতি বছর**
